@@ -31,8 +31,8 @@ public class Cliente {
             DataOutputStream dos = new DataOutputStream(osAux);
 
             //Comienzo cliente
-            System.out.println("Hola");
-            dos.writeUTF("Hola");
+            System.out.println("hola");
+            dos.writeUTF("hola");
             System.out.println("Servidor: " + dis.readUTF());
 
             while (cont) {
@@ -40,7 +40,7 @@ public class Cliente {
                 System.out.println("Introduce el código de la butaca que quieras reservar:");
                 msg = sc.nextLine();
                 
-                if (msg.equals("Fi")) {
+                if (msg.equals("fin")) {
                     dos.writeUTF(msg);
                     System.out.println("Servidor: " + dis.readUTF());
                     cont = false;
