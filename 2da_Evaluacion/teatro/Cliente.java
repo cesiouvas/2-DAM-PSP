@@ -5,14 +5,18 @@ package teatro;
  */
 import java.io.*;
 import java.net.*;
+import java.util.*;
 
 public class Cliente {
 
     static final String host = "localhost";
     static final int port = 5000;
+    static Scanner sc = new Scanner(System.in);
 
     public Cliente() {
         try {
+            boolean cont = true;
+            String msg;
             //Crear socket
             Socket sCliente = new Socket(host, port);
             System.out.println("Conectando al servidor...");
@@ -25,17 +29,34 @@ public class Cliente {
             //Flujo de entrada del cliente
             OutputStream osAux = sCliente.getOutputStream();
             DataOutputStream dos = new DataOutputStream(osAux);
-            
+
             //Comienzo cliente
             System.out.println("Hola");
             dos.writeUTF("Hola");
             System.out.println("Servidor: " + dis.readUTF());
+
+            while (cont) {
+                //Selección butaca
+                System.out.println("Introduce el código de la butaca que quieras reservar:");
+                msg = sc.nextLine();
+                
+                if (msg.equals("Fi")) {
+                    dos.writeUTF(msg);
+                    System.out.println("Servidor: " + dis.readUTF());
+                    cont = false;
+                } else {
+                    dos.writeUTF(msg);
+                    System.out.println("Servidor: " + dis.readUTF());
+                }
+            }
             
-            //Selección butaca
+            //Cerrar conexión
+            sCliente.close();
+            System.out.println("Cerrando conexión...");
 
         } catch (Exception e) {
             e.printStackTrace();
-        }        
+        }
     }
 
     public static void main(String[] args) {
