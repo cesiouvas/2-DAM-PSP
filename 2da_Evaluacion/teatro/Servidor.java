@@ -106,15 +106,32 @@ public class Servidor {
                             dos.writeUTF("Reserva VIP2 " + contVIP2);
                         }
                         break;
+                        
                     //VER BUTACAS
-                    case "Ver butacas":
+                    case "ver butacas":
                         System.out.println("Cliente: " + msg);
-                        butacas = "Tipo de butaca: VIP 1. Precio 250€. Disponibles: " + contVIP1
-                                + "\n";
+                        butacas = "Tipo de butaca: VIP 1. Precio: 250€. Disponibles: " + contVIP1
+                                + "\nTipo de butaca: VIP2. Precio: 250€. Disponibles: " + contVIP2
+                                + "\nTipo de butaca: LAT1. Precio: 100€. Disponibles: " + contLAT1
+                                + "\nTipo de butaca: LAT2. Precio: 100€. Disponibles: " + contLAT2
+                                + "\nTipo de butaca: CEN. Precio: 80€. Disponibles: " + contCEN
+                                + "\nTipo de butaca: GAL. Precio: 150€. Disponibles: " +contGAL;
+                        dos.writeUTF(butacas);
+                        break;
+                        
+                    //FIN
+                    case "fin":
+                        System.out.println("Cliente: " + msg);
+                        dos.writeUTF("Fin");
+                        cont = false;
+                        break;
                 }
-
             }
-
+            
+            //Cerrar conexión
+            System.out.println("Cerrando conexión");
+            sCliente.close();
+            ssServidor.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
